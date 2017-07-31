@@ -2281,7 +2281,7 @@ it is assumed to be aliases for the column names.')
 
         Parameters
         ----------
-        labels : single label or list-like
+        labels : single label, list-like, or function
         axis : int or axis name
         level : int or level name, default None
             For MultiIndex
@@ -2331,7 +2331,8 @@ it is assumed to be aliases for the column names.')
         axis = self._get_axis_number(axis)
         axis_name = self._get_axis_name(axis)
         axis, axis_ = self._get_axis(axis), axis
-
+        is_func = hasattr(labels, "__call__")
+        
         if axis.is_unique:
             if level is not None:
                 if not isinstance(axis, MultiIndex):
